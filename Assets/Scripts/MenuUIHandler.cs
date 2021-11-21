@@ -13,6 +13,7 @@ using UnityEngine.SceneManagement;
 public class MenuUIHandler : MonoBehaviour
 {
     public ColorPicker ColorPicker;
+    string inputName;
 
     public void NewColorSelected(Color color)
     {
@@ -44,12 +45,18 @@ public class MenuUIHandler : MonoBehaviour
     public void SaveColorClicked()
     {
         MainManager.Instance.SaveColor();
+        MainManager.Instance.SaveName(inputName);
     }
 
     public void LoadColorClicked()
     {
         MainManager.Instance.LoadColor();
         ColorPicker.SelectColor(MainManager.Instance.TeamColor);
+    }
+    public void ReadStringInput(string s)
+    {
+        inputName = s;
+        Debug.Log($"Player name {inputName}");
     }
 
 }

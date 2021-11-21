@@ -10,20 +10,27 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
 
     public Color TeamColor; // new variable declared
+    public string PlayerName;
 
     [System.Serializable]
-    class SavaData
+    class SaveData
     {
         public Color TeamColor;
+        public string PlayerName;
     }
     
     public void SaveColor()
     {
-        SavaData data = new SavaData();
+        SaveData data = new SaveData();
         data.TeamColor = TeamColor;
-
+        data.PlayerName = PlayerName;
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+    }
+
+    public void SaveName(string name)
+    {
+        PlayerName = name;
     }
 
     public void LoadColor()
@@ -32,10 +39,13 @@ public class MainManager : MonoBehaviour
         if(File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            SavaData data = JsonUtility.FromJson<SavaData>(json);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
             TeamColor = data.TeamColor;
+            PlayerName = data.PlayerName;
+            Debug.Log($"Name: {PlayerName}");
         }
     }
+
     private void Awake()
     {
         if (Instance != null)
