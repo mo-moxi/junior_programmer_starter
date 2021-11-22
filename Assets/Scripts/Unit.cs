@@ -72,7 +72,7 @@ public abstract class Unit : MonoBehaviour,
         m_Agent.SetDestination(position);
         m_Agent.isStopped = false;
     }
-    
+
     /// <summary>
     /// Override this function to implement what should happen when in range of its target.
     /// Note that this is called every frame the current target is in range, not only the first time we get in range! 

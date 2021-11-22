@@ -20,4 +20,25 @@ public class ProductivityUnit : Unit
             }
         }
     }
+
+    public override void GoTo(Building target)
+    {
+        ResetProductivity();
+        base.GoTo(target);
+    }
+
+    public override void GoTo(Vector3 position)
+    {
+        ResetProductivity();
+        base.GoTo(position);
+    }
+
+    void ResetProductivity()
+    {
+        if (m_CurrentPile != null)
+        {
+            m_CurrentPile.ProductionSpeed /= ProductivityMultiplier;
+            m_CurrentPile = null;
+        }
+    }
 }
